@@ -21,7 +21,7 @@ export const Top: React.FC = () => {
             title: "2日目",
             schedule: [
                 { time: "9:00", activity: "朝ごはん！" },
-                { time: "11:00", activity: "動物園" },
+                { time: "11:00", activity: "熱帯園" },
                 { time: "14:00-15:00", activity: "陶芸体験" },
                 { time: "17:30", activity: "夕食！" },
                 { time: "22:00", activity: "夜鳴きそば！" },
@@ -30,7 +30,7 @@ export const Top: React.FC = () => {
         {
             title: "3日目",
             schedule: [
-                { time: "9:00", activity: "朝ごはん" },
+                { time: "9:00", activity: "朝ごはん！" },
                 { time: "11:00", activity: "草津ぶーらぶら" },
                 { time: "16:00-20:10", activity: "バスで帰り" },
             ],

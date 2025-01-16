@@ -42,13 +42,19 @@ export const Top: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#FBFCFF] p-4 font-sans text-[#2B262E]">
+        // <div className="min-h-screen bg-[#FBFCFF] bg-cover bg-center p-4 font-sans text-[#2B262E]" style={{ backgroundImage: "https://user0514.cdnw.net/shared/img/thumb/zubo25_DSC08065_TP_V.jpg" }}>
+        <div
+            className="relative min-h-screen bg-cover bg-center p-4 font-sans text-[#2B262E]"
+            style={{
+                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('img/top/top.jpg')`,
+            }}
+        >
             {/* Header */}
-            <header className="mb-8 text-center">
+            <header className="mb-8 rounded-lg bg-white bg-opacity-60 p-4 text-center">
                 <h1 className="text-3xl font-bold text-[#344699] drop-shadow-md">
                     草津冒険の3日間
                 </h1>
-                <p className="mt-2 text-sm font-medium">
+                <p className="mt-2 text-sm font-medium text-black">
                     草津で過ごす楽しいひとときを、このしおりでサポートします！
                 </p>
             </header>
@@ -58,7 +64,7 @@ export const Top: React.FC = () => {
                 {days.map((day, index) => (
                     <div
                         key={index}
-                        className="overflow-hidden rounded-lg bg-white shadow-lg"
+                        className="overflow-hidden rounded-lg bg-white bg-opacity-60 shadow-lg"
                     >
                         <button
                             className="w-full bg-[#344699] px-4 py-3 text-left font-semibold text-white"

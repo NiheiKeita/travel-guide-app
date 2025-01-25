@@ -83,6 +83,18 @@ export const Top: React.FC = () => {
             url: "https://www.instagram.com/hanaingen_seigetsudou?igsh=N2FtbXJmYTR3ZHlq",
             mapUrl: "https://maps.app.goo.gl/qa8tRP3NxJZNQR5x6?g_st=com.google.maps.preview.copy"
         },
+        {
+            img: "/img/top/tamago.jpg",
+            title: "草津ガラス蔵",
+            url: "https://932gw.com/",
+            mapUrl: "https://maps.app.goo.gl/T8Nrdr7dYJMVcSpL6?g_st=com.google.maps.preview.copy"
+        },
+        {
+            img: "/img/top/onsenmanjuu.jpg",
+            title: "山びこ温泉まんじゅう",
+            url: "",
+            mapUrl: "https://maps.app.goo.gl/JchoGAmwV6zRMnPK8?g_st=com.google.maps.preview.copy"
+        },
     ]
 
     return (
@@ -159,7 +171,11 @@ export const Top: React.FC = () => {
                         {photos.map((photo, index) => (
                             <div key={index} className="cursor-pointer">
                                 {/* 画像クリックでURLを新しいタブで開く */}
-                                <a href={photo.url} target="_blank" rel="noopener noreferrer">
+                                <a
+                                    href={photo.url || undefined} // URLがない場合はundefined
+                                    target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                    rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                >
                                     <img
                                         src={photo.img}
                                         alt={photo.title}
@@ -168,10 +184,16 @@ export const Top: React.FC = () => {
                                 </a>
                                 {/* タイトルクリックでURLを新しいタブで開く */}
                                 <a
-                                    href={photo.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                                    href={photo.url || undefined} // URLがない場合はundefined
+                                    target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                    rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                    className={`mt-2 block text-center text-sm font-bold ${photo.url ? "text-gray-800 underline hover:text-blue-500" : "text-gray-800"
+                                        }`}
+                                    onClick={(e) => {
+                                        if (!photo.url) {
+                                            e.preventDefault() // URLがない場合のクリックを無効化
+                                        }
+                                    }}
                                 >
                                     {photo.title}
                                 </a>

@@ -95,6 +95,12 @@ export const Top: React.FC = () => {
             url: "",
             mapUrl: "https://maps.app.goo.gl/JchoGAmwV6zRMnPK8?g_st=com.google.maps.preview.copy"
         },
+        {
+            img: "/img/top/buta.jpg",
+            title: "豚りんの",
+            url: "https://www.instagram.com/butarinno?igsh=a3plM25zNWY3dnYz",
+            mapUrl: "https://maps.app.goo.gl/Tio86bqCpz7VXmXB7?g_st=com.google.maps.preview.copy"
+        },
     ]
 
     return (
@@ -197,7 +203,20 @@ export const Top: React.FC = () => {
                                 >
                                     {photo.title}
                                 </a>
-                                <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">地図アプリ</div>
+                                <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
+                                    <a
+                                        href={photo.mapUrl || undefined} // URLがない場合はundefined
+                                        target={photo.mapUrl ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                        rel={photo.mapUrl ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                        onClick={(e) => {
+                                            if (!photo.mapUrl) {
+                                                e.preventDefault() // URLがない場合のクリックを無効化
+                                            }
+                                        }}
+                                    >
+                                        地図アプリ
+                                    </a>
+                                </div>
                             </div>
                         ))}
                     </div>

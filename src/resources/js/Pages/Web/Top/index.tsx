@@ -4,7 +4,7 @@ import { photos } from "./cofig/gourmet"
 
 export const Top: React.FC = () => {
     const [activeDay, setActiveDay] = useState<number | null>(null)
-    const [modals, setModals] = useState([{ id: 1, isOpen: false }, { id: 2, isOpen: false }])
+    const [modals, setModals] = useState([{ id: 1, isOpen: false }, { id: 2, isOpen: false }, { id: 3, isOpen: false }])
     const modalControl = (id: number, opened: boolean) => {
         console.log(id, opened)
         setModals(prev => {
@@ -24,7 +24,7 @@ export const Top: React.FC = () => {
                 { time: "15:00-17:30", activity: "ゆったりぶらぶら", clickable: true, target: 1 },
                 { time: "17:30", activity: "夕食！" },
                 { time: "18:30-18:45", activity: "移動" },
-                { time: "19:00-21:00", activity: "星空ウォーク", clickable: true, target: 2 },
+                { time: "19:00-21:00", activity: "（星空ウォーク）", clickable: true, target: 2 },
                 { time: "22:00", activity: "夜鳴きそば！" },
             ],
         },
@@ -34,6 +34,8 @@ export const Top: React.FC = () => {
                 { time: "9:00", activity: "朝ごはん！" },
                 { time: "11:00", activity: "熱帯園" },
                 { time: "14:00-15:00", activity: "陶芸体験" },
+                { time: "15:00-16:00", activity: "おさ湯", clickable: true, target: 3 },
+                { time: "16:00-17:30", activity: "ゆったりぶらぶら", clickable: true, target: 1 },
                 { time: "17:30", activity: "夕食！" },
                 { time: "22:00", activity: "夜鳴きそば！" },
             ],
@@ -53,7 +55,6 @@ export const Top: React.FC = () => {
     }
 
     return (
-        // <div className="min-h-screen bg-[#FBFCFF] bg-cover bg-center p-4 font-sans text-[#2B262E]" style={{ backgroundImage: "https://user0514.cdnw.net/shared/img/thumb/zubo25_DSC08065_TP_V.jpg" }}>
         <div
             className="relative min-h-screen bg-cover bg-center p-4 font-sans text-[#2B262E]"
             style={{
@@ -114,6 +115,34 @@ export const Top: React.FC = () => {
                         </div>
                     </div>
                 ))}
+                <div>
+                    <div className="mb-8 mt-8 rounded-lg bg-white bg-opacity-60 p-4 text-center">
+                        <h2 className="text-3xl font-bold text-[#344699] drop-shadow-md">
+                            旅館情報
+                        </h2>
+                        <>
+                            <div className="mb-4 mt-2 flex items-center justify-center text-xl font-bold text-gray-800 ">~季の庭~</div>
+                            <div className="grid  gap-4">
+                                <div className="cursor-pointer">
+                                    <a href="https://dormy-hotels.com/resort/hotels/tokinoniwa/" target="_blank" rel="noopener noreferrer">
+                                        <img
+                                            src="https://img.dormy-hotels.com/resort/hotels/tokinoniwa/images/img_mv2.webp"
+                                            className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                                        />
+                                    </a>
+                                    <div className="flex items-center justify-center pt-2 text-xs font-bold text-blue-500">
+                                        <a
+                                            href="https://dormy-hotels.com/resort/hotels/tokinoniwa/access/"
+                                            target="_blank" rel="noreferrer"
+                                        >
+                                            アクセス
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    </div>
+                </div>
             </div>
             <ModalView
                 isOpen={modals.find(modal => modal.id === 1)?.isOpen ?? false}
@@ -195,6 +224,40 @@ export const Top: React.FC = () => {
                                 星空ウォーク
                             </a>
                             {/* <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">地図アプリ</div> */}
+                        </div>
+                    </div>
+                </>
+            </ModalView>
+            <ModalView
+                isOpen={modals.find(modal => modal.id === 3)?.isOpen ?? false}
+                onClose={() => { modalControl(3, false) }}
+                title={""}
+            >
+                <>
+                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~おさ湯~</div>
+                    <div className="grid  gap-4">
+                        <div className="cursor-pointer">
+                            <a href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu" target="_blank" rel="noopener noreferrer">
+                                <img
+                                    src="/img/top/osayu.jpg"
+                                    className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                                />
+                            </a>
+                            <a
+                                href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                            >
+                                おさ湯
+                            </a>
+                            <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
+                                <a
+                                    href="https://maps.app.goo.gl/2grymNj3Ka64QPdY7?g_st=com.google.maps.preview.copy"
+                                >
+                                    地図アプリ
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </>

@@ -24,7 +24,7 @@ export const ModalView = React.memo<Props>(function TitleText({
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}></div>
             <div className="relative m-2 w-full max-w-2xl rounded-lg bg-white shadow-lg">
-                <div className="relative max-h-[90vh] w-full overflow-y-auto p-6 pb-20">
+                <div className="relative max-h-[90svh] w-full overflow-y-auto p-6 pb-20">
                     <div className="mb-4 flex items-center justify-between">
                         <h2 className="text-xl font-bold">{title}</h2>
                     </div>

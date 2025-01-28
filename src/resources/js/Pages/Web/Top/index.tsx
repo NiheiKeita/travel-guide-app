@@ -1,6 +1,7 @@
 import ModalView from "@/Components/ModalView"
 import React, { useState } from "react"
 import { photos } from "./cofig/gourmet"
+import CountdownTimer from "./components/CountdownTimer"
 
 export const Top: React.FC = () => {
     const [activeDay, setActiveDay] = useState<number | null>(null)
@@ -70,6 +71,9 @@ export const Top: React.FC = () => {
                     草津で過ごす楽しいひとときを、このしおりでサポートします！
                 </p>
             </header>
+            <div className="mb-8 rounded-lg bg-white bg-opacity-60 p-4 text-center">
+                <CountdownTimer />
+            </div>
 
             {/* Schedule */}
             <div className="space-y-4">

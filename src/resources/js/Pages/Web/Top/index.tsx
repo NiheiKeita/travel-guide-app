@@ -149,120 +149,112 @@ export const Top: React.FC = () => {
                 onClose={() => { modalControl(1, false) }}
                 title={""}
             >
-                <>
-                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~食べ歩きグルメ~</div>
-                    <div className="grid grid-cols-2 gap-4">
-                        {photos.map((photo, index) => (
-                            <div key={index} className="cursor-pointer">
-                                {/* 画像クリックでURLを新しいタブで開く */}
+                <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~食べ歩きグルメ~</div>
+                <div className="grid grid-cols-2 gap-4">
+                    {photos.map((photo, index) => (
+                        <div key={index} className="cursor-pointer">
+                            {/* 画像クリックでURLを新しいタブで開く */}
+                            <a
+                                href={photo.url || undefined} // URLがない場合はundefined
+                                target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                            >
+                                <img
+                                    src={photo.img}
+                                    alt={photo.title}
+                                    className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                                />
+                            </a>
+                            {/* タイトルクリックでURLを新しいタブで開く */}
+                            <a
+                                href={photo.url || undefined} // URLがない場合はundefined
+                                target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                className={`mt-2 block text-center text-sm font-bold ${photo.url ? "text-gray-800 underline hover:text-blue-500" : "text-gray-800"}`}
+                                onClick={(e) => {
+                                    if (!photo.url) {
+                                        e.preventDefault() // URLがない場合のクリックを無効化
+                                    }
+                                }}
+                            >
+                                {photo.title}
+                            </a>
+                            <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
                                 <a
-                                    href={photo.url || undefined} // URLがない場合はundefined
-                                    target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
-                                    rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
-                                >
-                                    <img
-                                        src={photo.img}
-                                        alt={photo.title}
-                                        className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
-                                    />
-                                </a>
-                                {/* タイトルクリックでURLを新しいタブで開く */}
-                                <a
-                                    href={photo.url || undefined} // URLがない場合はundefined
-                                    target={photo.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
-                                    rel={photo.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
-                                    className={`mt-2 block text-center text-sm font-bold ${photo.url ? "text-gray-800 underline hover:text-blue-500" : "text-gray-800"
-                                        }`}
+                                    href={photo.mapUrl || undefined} // URLがない場合はundefined
+                                    target={photo.mapUrl ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                    rel={photo.mapUrl ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
                                     onClick={(e) => {
-                                        if (!photo.url) {
+                                        if (!photo.mapUrl) {
                                             e.preventDefault() // URLがない場合のクリックを無効化
                                         }
                                     }}
                                 >
-                                    {photo.title}
+                                    地図アプリ
                                 </a>
-                                <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
-                                    <a
-                                        href={photo.mapUrl || undefined} // URLがない場合はundefined
-                                        target={photo.mapUrl ? "_blank" : undefined} // URLがない場合はtargetを無効化
-                                        rel={photo.mapUrl ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
-                                        onClick={(e) => {
-                                            if (!photo.mapUrl) {
-                                                e.preventDefault() // URLがない場合のクリックを無効化
-                                            }
-                                        }}
-                                    >
-                                        地図アプリ
-                                    </a>
-                                </div>
                             </div>
-                        ))}
-                    </div>
-                </>
+                        </div>
+                    ))}
+                </div>
             </ModalView>
             <ModalView
                 isOpen={modals.find(modal => modal.id === 2)?.isOpen ?? false}
                 onClose={() => { modalControl(2, false) }}
                 title={""}
             >
-                <>
-                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~星空ウォーク~</div>
-                    <div className="grid  gap-4">
-                        <div className="cursor-pointer">
-                            <a href="https://www.instagram.com/p/DEehsssSnJb/?igsh=MWtkd3J0YzE5ZDRwdg==" target="_blank" rel="noopener noreferrer">
-                                <img
-                                    src="/img/top/star.jpg"
-                                    className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
-                                />
-                            </a>
-                            <a
-                                href="https://www.instagram.com/p/DEehsssSnJb/?igsh=MWtkd3J0YzE5ZDRwdg=="
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
-                            >
-                                星空ウォーク
-                            </a>
-                            {/* <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">地図アプリ</div> */}
-                        </div>
+                <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~星空ウォーク~</div>
+                <div className="grid  gap-4">
+                    <div className="cursor-pointer">
+                        <a href="https://www.instagram.com/p/DEehsssSnJb/?igsh=MWtkd3J0YzE5ZDRwdg==" target="_blank" rel="noopener noreferrer">
+                            <img
+                                src="/img/top/star.jpg"
+                                className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                            />
+                        </a>
+                        <a
+                            href="https://www.instagram.com/p/DEehsssSnJb/?igsh=MWtkd3J0YzE5ZDRwdg=="
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                        >
+                            星空ウォーク
+                        </a>
                     </div>
-                </>
+                </div>
             </ModalView>
             <ModalView
                 isOpen={modals.find(modal => modal.id === 3)?.isOpen ?? false}
                 onClose={() => { modalControl(3, false) }}
                 title={""}
             >
-                <>
-                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~おさ湯~</div>
-                    <div className="grid  gap-4">
-                        <div className="cursor-pointer">
-                            <a href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu" target="_blank" rel="noopener noreferrer">
-                                <img
-                                    src="/img/top/osayu.jpg"
-                                    className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
-                                />
-                            </a>
+                <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~おさ湯~</div>
+                <div className="grid  gap-4">
+                    <div className="cursor-pointer">
+                        <a href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu" target="_blank" rel="noopener noreferrer">
+                            <img
+                                src="/img/top/osayu.jpg"
+                                className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                            />
+                        </a>
+                        <a
+                            href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                        >
+                            おさ湯
+                        </a>
+                        <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
                             <a
-                                href="https://www.instagram.com/kusatsuonsen_osayu?igsh=bnAwdXgzcnplNDZu"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                                href="https://maps.app.goo.gl/2grymNj3Ka64QPdY7?g_st=com.google.maps.preview.copy"
                             >
-                                おさ湯
+                                地図アプリ
                             </a>
-                            <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
-                                <a
-                                    href="https://maps.app.goo.gl/2grymNj3Ka64QPdY7?g_st=com.google.maps.preview.copy"
-                                >
-                                    地図アプリ
-                                </a>
-                            </div>
                         </div>
                     </div>
-                </>
+                </div>
             </ModalView>
-        </div>
+        </div >
     )
 }
 

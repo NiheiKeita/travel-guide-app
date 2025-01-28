@@ -32,7 +32,7 @@ export const CountdownTimer = React.memo(function CountdownTimer() {
     }, [])
 
     if (!timeLeft) {
-        return <div className="text-center text-xl font-bold">出発！</div>
+        return null
     }
 
     return (

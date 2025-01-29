@@ -5,7 +5,13 @@ import CountdownTimer from "./components/CountdownTimer"
 
 export const Top: React.FC = () => {
     const [activeDay, setActiveDay] = useState<number | null>(null)
-    const [modals, setModals] = useState([{ id: 1, isOpen: false }, { id: 2, isOpen: false }, { id: 3, isOpen: false }])
+    const [modals, setModals] = useState([
+        { id: 1, isOpen: false },
+        { id: 2, isOpen: false },
+        { id: 3, isOpen: false },
+        { id: 4, isOpen: false },
+        { id: 5, isOpen: false }
+    ])
     const modalControl = (id: number, opened: boolean) => {
         console.log(id, opened)
         setModals(prev => {
@@ -33,8 +39,8 @@ export const Top: React.FC = () => {
             title: "2日目",
             schedule: [
                 { time: "9:00", activity: "朝ごはん！" },
-                { time: "11:00", activity: "熱帯園" },
-                { time: "14:00-15:00", activity: "陶芸体験" },
+                { time: "11:00", activity: "熱帯園", clickable: true, target: 5 },
+                { time: "14:00-15:00", activity: "陶芸体験", clickable: true, target: 4 },
                 { time: "15:00-16:00", activity: "おさ湯", clickable: true, target: 3 },
                 { time: "16:00-17:30", activity: "ゆったりぶらぶら", clickable: true, target: 1 },
                 { time: "17:30", activity: "夕食！" },
@@ -258,8 +264,73 @@ export const Top: React.FC = () => {
                     </div>
                 </div>
             </ModalView>
+            <ModalView
+                isOpen={modals.find(modal => modal.id === 4)?.isOpen ?? false}
+                onClose={() => { modalControl(4, false) }}
+                title={""}
+            >
+                <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~陶工房 美土里の洞~</div>
+                <div className="grid  gap-4">
+                    <div className="cursor-pointer">
+                        <a href="https://midori-hora.moo.jp/" target="_blank" rel="noopener noreferrer">
+                            <img
+                                src="/img/top/tougei.jpeg"
+                                className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                            />
+                        </a>
+                        <a
+                            href="https://midori-hora.moo.jp/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                        >
+                            陶工房 美土里の洞
+                        </a>
+                        <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
+                            <a
+                                href="https://maps.app.goo.gl/Mb7Mb5wmKBSCobuB9"
+                            >
+                                地図アプリ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ModalView>
+            <ModalView
+                isOpen={modals.find(modal => modal.id === 5)?.isOpen ?? false}
+                onClose={() => { modalControl(5, false) }}
+                title={""}
+            >
+                <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~草津熱帯圏~</div>
+                <div className="grid  gap-4">
+                    <div className="cursor-pointer">
+                        <a href="http://nettaiken.com/" target="_blank" rel="noopener noreferrer">
+                            <img
+                                src="/img/top/anettai.jpg"
+                                className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                            />
+                        </a>
+                        <a
+                            href="http://nettaiken.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 block text-center text-sm font-bold text-gray-800 underline hover:text-blue-500"
+                        >
+                            草津熱帯圏
+                        </a>
+                        <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
+                            <a
+                                href="http://nettaiken.com/index-3.html"
+                            >
+                                アクセス
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ModalView>
         </div >
     )
 }
 
 export default Top
+

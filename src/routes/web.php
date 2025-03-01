@@ -22,13 +22,17 @@ Route::group(['middleware' => 'basicauth'], function () {
     Route::get('/', [TopController::class, 'index'])->name('web.top');
 
     //管理画面側
-    Route::get('admin/travels', [TravelController::class, 'index'])->name('admin.travel.index');
-    Route::post('admin/travels', [TravelController::class, 'store'])->name('admin.travel.store');
-    Route::get('admin/travels/add', [TravelController::class, 'create'])->name('admin.travel.create');
-    Route::get('admin/travels/{id}', [TravelController::class, 'edit'])->name('admin.travel.edit');
-    Route::put('admin/travels/{id}', [TravelController::class, 'update'])->name('admin.travel.update');
-    Route::delete('admin/travels/{id}', [TravelController::class, 'delete'])->name('admin.travel.delete');
-
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::prefix('travels')->name('travel.')->group(function () {
+            Route::get('/', [TravelController::class, 'index'])->name('index');
+            Route::post('/', [TravelController::class, 'store'])->name('store');
+            Route::get('add', [TravelController::class, 'create'])->name('create');
+            Route::get('{id}', [TravelController::class, 'show'])->name('show');
+            Route::get('{id}/edit', [TravelController::class, 'edit'])->name('edit');
+            Route::put('{id}', [TravelController::class, 'update'])->name('update');
+            Route::delete('{id}', [TravelController::class, 'delete'])->name('delete');
+        });
+    });
     // // API
     // Route::post('/api/upload', [ImageController::class, 'upload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload');
     // Route::post('/api/upload/ma', [ImageController::class, 'maUpload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload.ma');

@@ -30,7 +30,7 @@ class TravelController extends Controller
         return Inertia::render('Admin/TravelCreateView');
     }
 
-    public function save(): RedirectResponse
+    public function store(): RedirectResponse
     {
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }

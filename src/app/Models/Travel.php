@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Travel extends Model
 {
+    protected $table = 'travels';
     use SoftDeletes;
 
     protected $guarded = [

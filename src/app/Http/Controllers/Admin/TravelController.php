@@ -32,13 +32,6 @@ class TravelController extends Controller
 
     public function save(): RedirectResponse
     {
-        // $travel = new Travel();
-        // $travel->title = $request->title;
-        // $travel->description = $request->description;
-        // $travel->price = $request->price;
-        // $travel->image_id = $image->id;
-        // $travel->save();
-
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }
 
@@ -51,25 +44,11 @@ class TravelController extends Controller
 
     public function update(): RedirectResponse
     {
-        // $travel = new Travel();
-        // $travel->title = $request->title;
-        // $travel->description = $request->description;
-        // $travel->price = $request->price;
-        // $travel->image_id = $image->id;
-        // $travel->save();
-
         return redirect(route("admin.travel.index"))->with('message', '更新が完了しました');
     }
 
     public function delete(): RedirectResponse
     {
-        // $travel = new Travel();
-        // $travel->title = $request->title;
-        // $travel->description = $request->description;
-        // $travel->price = $request->price;
-        // $travel->image_id = $image->id;
-        // $travel->save();
-
         return redirect(route("admin.travel.index"))->with('message', '削除が完了しました');
     }
 }

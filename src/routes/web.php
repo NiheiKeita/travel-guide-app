@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\TravelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\TopController;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,6 @@ Route::group(['middleware' => 'basicauth'], function () {
         });
     });
     // // API
-    // Route::post('/api/upload', [ImageController::class, 'upload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload');
+    Route::post('/api/upload/image', [ImageController::class, 'upload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload');
     // Route::post('/api/upload/ma', [ImageController::class, 'maUpload'])->withoutMiddleware(VerifyCsrfToken::class)->name('upload.ma');
 });

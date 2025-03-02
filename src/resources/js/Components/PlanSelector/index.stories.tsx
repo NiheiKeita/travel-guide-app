@@ -29,7 +29,7 @@ export const Default: Story = {
             <PlanSelector
                 items={list}
                 value={data}
-                onChange={(v) => setData(v)}
+                onChangeSelect={(v) => setData(v)}
             />
         )
     },

@@ -3,13 +3,14 @@ import React, { InputHTMLAttributes, useState } from 'react'
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
     items: string[],
-    onChange: (value: any) => void,
+    onChangeSelect: (value: string) => void,
     value: string
 }
 
 export const PlanSelector = React.memo<Props>(function PlanSelector({
     items,
     onChange,
+    onChangeSelect,
     value,
     ...props
 }) {
@@ -34,7 +35,7 @@ export const PlanSelector = React.memo<Props>(function PlanSelector({
     const handleClick = (item: string) => {
         setSelectedItem(item)
         setIsOpen(false)
-        onChange(item)
+        onChangeSelect(item)
     }
 
     return (
@@ -44,7 +45,7 @@ export const PlanSelector = React.memo<Props>(function PlanSelector({
                     type="text"
                     placeholder="Select an option..."
                     value={value}
-                    onChange={(e) => onChange(e.target.value)}
+                    onChange={(e) => onChangeSelect(e.target.value)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     className="w-full rounded-md border border-gray-300 p-2 text-gray-800"

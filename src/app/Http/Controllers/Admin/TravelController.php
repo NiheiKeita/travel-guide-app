@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Models\Travel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,8 +31,20 @@ class TravelController extends Controller
         return Inertia::render('Admin/TravelCreateView');
     }
 
-    public function store(): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
+        $travel = Travel::create([
+            "title" => $request->title,
+            "memo" => $request->memo,
+            "first_date" => $request->first_date,
+            "last_date" => $request->last_date,
+            "travel_price" => $request->travel_price,
+            "count_down_start_time" => $request->count_down_start_time,
+        ]);
+        foreach ($request->images as $requestImage) {
+            $image = Image::where("id", $requestImage["id"])->first();
+            $travel->images()->save($image);
+        }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }
 

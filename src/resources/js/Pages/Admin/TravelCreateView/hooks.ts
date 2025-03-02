@@ -4,10 +4,11 @@ import { FormEventHandler, useCallback } from "react"
 export const useTravelCreateView = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         title: '',
-        select: '',
-        price: '',
+        travel_price: "",
         memo: '',
-        date: '',
+        first_date: '',
+        last_date: '',
+        count_down_start_time: '',
         images: [] as { url: string; id: string; }[],
     })
 

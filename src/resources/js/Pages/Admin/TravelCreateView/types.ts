@@ -1,6 +1,7 @@
 export type PropertyKeys =
     | "title"
-    | "select"
-    | "price"
-    | "date"
+    | "travel_price"
+    | "first_date"
+    | "last_date"
+    | "count_down_start_time"
     | "memo";

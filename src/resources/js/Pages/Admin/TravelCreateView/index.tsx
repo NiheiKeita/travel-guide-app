@@ -12,9 +12,11 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
     const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
     const fields = [
         { label: "旅行タイトル", id: "title", required: true, type: "text" },
-        { label: "サンプル", id: "select", required: false, type: "select", list: ["a", "b"] },
-        { label: "お金(円)", id: "price", required: true, type: "number" },
-        { label: "日付", id: "date", required: true, type: "date" },
+        // { label: "サンプル", id: "select", required: false, type: "select", list: ["a", "b"] },
+        { label: "旅費(円)", id: "travel_price", required: true, type: "number" },
+        { label: "始まる日", id: "first_date", required: true, type: "date" },
+        { label: "終わる日", id: "last_date", required: true, type: "date" },
+        { label: "タイマー開始日", id: "count_down_start_time", required: true, type: "date" },
         { label: "メモ", id: "memo", required: false, type: "textArea" }
     ] as {
         label: string

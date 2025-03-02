@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('title')->nullable();
+            $table->string('memo')->nullable();
             $table->timestamp('first_date')->nullable();
             $table->timestamp('last_date')->nullable();
         });

@@ -25,7 +25,7 @@ export const InputStationArea = React.memo<Props>(function InputStationArea({
                     <PlanSelector
                         type="text"
                         value={newStation.name}
-                        onChange={(value) => setNewStation({ ...newStation, name: value })}
+                        onChangeSelect={(value) => setNewStation({ ...newStation, name: value })}
                         placeholder="最寄駅名"
                         className="mr-2 rounded border px-4 py-2"
                         items={selectionStations}

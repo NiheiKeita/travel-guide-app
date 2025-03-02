@@ -5,15 +5,13 @@ import Button from '@/Components/Button'
 type Props = {
     images: { url: any; id: any }[],
     onImageChange: (images: { url: any; id: any }[]) => void,
-    type?: "a" | "b"
 }
 
 export const UploadImageArea = React.memo<Props>(function UploadImageArea({
     images,
-    onImageChange,
-    type = "a"
+    onImageChange
 }) {
-    const { handleRemoveImage, handleButtonClick, handleImageChange, fileInputRef } = useUploadImageArea(onImageChange, images, type)
+    const { handleRemoveImage, handleButtonClick, handleImageChange, fileInputRef } = useUploadImageArea(onImageChange, images)
 
     return (
         <div>

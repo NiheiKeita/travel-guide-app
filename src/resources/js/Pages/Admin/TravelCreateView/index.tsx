@@ -5,20 +5,23 @@ import React from 'react'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { PropertyKeys } from './types'
 import InputField from '@/Components/InputField'
+import InputLabel from '@/Components/InputLabel'
+import UploadImageArea from '@/Components/UploadImageArea'
 
 export const TravelCreateView = React.memo(function TravelCreateView() {
-    const { data, setData, processing, errors, submit } = useTravelCreateView()
+    const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
     const fields = [
         { label: "旅行タイトル", id: "title", required: true, type: "text" },
         { label: "サンプル", id: "select", required: false, type: "select", list: ["a", "b"] },
         { label: "お金(円)", id: "price", required: true, type: "number" },
+        { label: "日付", id: "date", required: true, type: "date" },
         { label: "メモ", id: "memo", required: false, type: "textArea" }
     ] as {
         label: string
         id: PropertyKeys
         required: boolean
         type: string
-        list?: any
+        list?: string[]
     }[]
     return (
         <AdminLayout>
@@ -41,7 +44,13 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
                         />
                     </div>
                 ))}
-
+                <div className="mt-4" >
+                    <InputLabel value="画像" />
+                    <UploadImageArea
+                        images={data["images"]}
+                        onImageChange={handleChangeImages}
+                    />
+                </div>
                 <div className="mt-4 flex items-center justify-end">
                     <Button className='w-full' variant='blue' disabled={processing}>
                         登録

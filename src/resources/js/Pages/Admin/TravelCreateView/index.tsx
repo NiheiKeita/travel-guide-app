@@ -28,7 +28,7 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
             <div className='flex justify-center'>
                 <TitleText>旅行の作成</TitleText>
             </div>
-            <form onSubmit={submit} className='mt-20'>
+            <form onSubmit={submit} className='my-20'>
                 {fields.map((field) => (
                     <div className="mt-4" key={field.id}>
                         <InputField

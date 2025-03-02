@@ -17,29 +17,33 @@ class Travel extends Model
     protected $guarded = [
         'id',
     ];
+
     /**
-     * @return BelongsToMany<Hotel>
+     * @return BelongsToMany<Hotel, $this>
      */
     public function hotels(): BelongsToMany
     {
         return $this->belongsToMany(Hotel::class);
     }
+
     /**
-     * @return BelongsTo<Schedule>
+     * @return BelongsTo<Schedule, $this>
      */
     public function schedules(): BelongsTo
     {
         return $this->belongsTo(Schedule::class);
     }
+
     /**
-     * @return BelongsTo<Modal>
+     * @return BelongsTo<Modal, $this>
      */
     public function modals(): BelongsTo
     {
         return $this->belongsTo(Modal::class);
     }
+
     /**
-     * @return MorphMany<Image>
+     * @return MorphMany<Image, $this>
      */
     public function images(): MorphMany
     {

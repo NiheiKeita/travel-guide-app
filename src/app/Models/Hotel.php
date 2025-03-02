@@ -16,14 +16,15 @@ class Hotel extends Model
     ];
 
     /**
-     * @return BelongsToMany<Travel>
+     * @return BelongsToMany<Travel, $this>
      */
     public function travels(): BelongsToMany
     {
         return $this->belongsToMany(Travel::class);
     }
+
     /**
-     * @return MorphMany<Image>
+     * @return MorphMany<Image, $this>
      */
     public function images(): MorphMany
     {

@@ -15,14 +15,15 @@ class Schedule extends Model
     ];
 
     /**
-     * @return BelongTo<Travel>
+     * @return BelongsTo<Travel, $this>
      */
     public function travel(): BelongsTo
     {
         return $this->belongsTo(Travel::class);
     }
+
     /**
-     * @return BelongsTo<Modal>
+     * @return BelongsTo<Modal, $this>
      */
     public function modal(): BelongsTo
     {

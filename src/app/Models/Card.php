@@ -16,14 +16,15 @@ class Card extends Model
     ];
 
     /**
-     * @return BelongTo<Modal>
+     * @return BelongsTo<Modal, $this>
      */
     public function modal(): BelongsTo
     {
         return $this->belongsTo(Modal::class);
     }
+
     /**
-     * @return MorphMany<Image>
+     * @return MorphMany<Image, $this>
      */
     public function images(): MorphMany
     {

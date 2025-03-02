@@ -16,21 +16,23 @@ class Modal extends Model
     ];
 
     /**
-     * @return BelongTo<Travel>
+     * @return BelongsTo<Travel, $this>
      */
     public function travel(): BelongsTo
     {
         return $this->belongsTo(Travel::class);
     }
+
     /**
-     * @return HasMany<Schedule>
+     * @return HasMany<Schedule, $this>
      */
     public function schedules(): HasMany
     {
         return $this->hasMany(Schedule::class);
     }
+
     /**
-     * @return HasMany<Card>
+     * @return HasMany<Card, $this>
      */
     public function cards(): HasMany
     {

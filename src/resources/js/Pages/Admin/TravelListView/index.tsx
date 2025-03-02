@@ -29,7 +29,7 @@ export const TravelListView = React.memo<Props>(function TravelListView({
         // { key: 'updated_at', label: '更新日時', format: (value: string) => formatStringToDate(value) },
         // { key: 'deleted_at', label: '削除日時', format: (value: string) => formatStringToDate(value) },
         { key: 'title', label: 'タイトル' },
-        { key: 'travel_price', label: '旅費' },
+        { key: 'travel_price', label: '旅費(円)' },
         { key: 'first_date', label: '始まる日', format: (value: string) => formatStringToDate(value) },
         { key: 'last_date', label: '終わる日', format: (value: string) => formatStringToDate(value) },
         { key: 'count_down_start_time', label: 'タイマー開始日', format: (value: string) => formatStringToDate(value) },

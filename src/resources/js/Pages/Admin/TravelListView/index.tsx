@@ -1,50 +1,94 @@
 
-
-
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
 import Button from '@/Components/Button'
-import TextInput from '@/Components/TextInput'
-import { useTravelListView } from './hooks'
-import TitleText from '@/Components/TitleText'
 import React from 'react'
 import AdminLayout from '@/Layouts/AdminLayout'
+import BackButtonAndTitle from '@/Components/BackButtonAndTitle'
+import FlashMessage from '@/Components/FlashMessage'
+import { router } from '@inertiajs/react'
+import { formatStringToDate } from '@/hooks/format'
 
-export const TravelListView = React.memo(function TravelListView() {
-    const { data, setData, post, processing, errors, reset, submit } = useTravelListView()
+type Props = {
+  flash?: {
+    message: string
+  },
+  travels: {
+    id: number,
+    title: string,
+    created_at: string,
+    updated_at: string,
+    deleted_at: string,
+  }[]
+}
+export const TravelListView = React.memo<Props>(function TravelListView({
+  flash,
+  travels
+}) {
+  const headers = [
+    { key: 'detailButton', label: '詳細' },
+    { key: 'created_at', label: '作成日時', format: (value: string) => formatStringToDate(value) },
+    { key: 'updated_at', label: '更新日時', format: (value: string) => formatStringToDate(value) },
+    { key: 'deleted_at', label: '削除日時', format: (value: string) => formatStringToDate(value) },
+    { key: 'title', label: 'タイトル' },
+  ]
+  return (
+    <AdminLayout>
+      <BackButtonAndTitle showBackButton={false}>旅一覧</BackButtonAndTitle>
+      {flash?.message &&
+        <div className='mt-5'>
+          <FlashMessage>{flash.message}</FlashMessage>
+        </div>
+      }
+      <div className="flex overflow-x-auto">
+        <div className="min-w-full flex-none">
+          <table className="mt-2 min-w-full table-auto bg-white shadow-md">
+            <thead>
+              <tr className="bg-gray-200 text-gray-700">
+                {headers.map((header, index) => (
+                  <th key={index} className="px-6 py-3 text-left text-sm font-medium">
+                    {header.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {travels.map((travel) => (
+                <tr key={travel.id} className="border-t">
+                  {headers.map((header, headerIndex) => {
+                    if (header.key == "detailButton") {
+                      return (
+                        <td className='px-4 py-2' key={headerIndex}>
+                          <Button
+                            onClick={() => router.visit(route("admin.travel.show", travel.id))}
+                          >
+                            詳細
+                          </Button>
+                        </td>
+                      )
+                    } else {
+                      const keys = header.key.split('.')
+                      let value: any = travel
+                      keys.forEach(key => {
+                        value = value?.[key] || 'N/A'
+                      })
+                      if (header.format) {
+                        value = header.format(value)
+                      }
 
-    return (
-        <AdminLayout>
-            <div className='flex justify-center'>
-                <TitleText>TravelShowView</TitleText>
-            </div>
-            <form onSubmit={submit} className='mt-20'>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-
-                    <Button className='w-full' variant='blue' disabled={processing}>
-                        ログイン
-                    </Button>
-                </div>
-            </form>
-        </AdminLayout>
-    )
+                      return (
+                        <td key={headerIndex} className="px-6 py-4 text-sm text-gray-900">
+                          {value}
+                        </td>
+                      )
+                    }
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </AdminLayout>
+  )
 })
 
 export default TravelListView

@@ -19,6 +19,16 @@ export const formatNumber = (price: number | undefined): string => {
     if (!price?.toLocaleString()) return ""
     return `${price?.toLocaleString()}`
 }
+export const formatStringToDate = (value: string): string => {
+    if (!value) return 'N/A'
+    const date = new Date(value)
+    if (isNaN(date.getTime())) return 'N/A'
+    return date.toLocaleDateString('ja-JP', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    })
+}
 
 export const formatCreatedAt = (date: Date): string => {
     return date.toLocaleDateString('ja-JP', {

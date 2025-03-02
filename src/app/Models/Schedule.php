@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Schedule extends Model
@@ -12,4 +13,19 @@ class Schedule extends Model
     protected $guarded = [
         'id',
     ];
+
+    /**
+     * @return BelongTo<Travel>
+     */
+    public function travel(): BelongsTo
+    {
+        return $this->belongsTo(Travel::class);
+    }
+    /**
+     * @return BelongsTo<Modal>
+     */
+    public function modal(): BelongsTo
+    {
+        return $this->belongsTo(Modal::class);
+    }
 }

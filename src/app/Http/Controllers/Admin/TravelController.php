@@ -21,8 +21,13 @@ class TravelController extends Controller
 
     public function show(Request $request): Response
     {
+        // dd(Travel::where("id", $request->id)->with([
+        //     'images',
+        // ])->first());
         return Inertia::render('Admin/TravelShowView', [
-            'travel' => Travel::where("id", $request->travel_id)->first(),
+            'travel' => Travel::where("id", $request->id)->with([
+                'images',
+            ])->first(),
         ]);
     }
 

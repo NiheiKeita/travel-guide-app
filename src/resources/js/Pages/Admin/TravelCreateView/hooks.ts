@@ -1,3 +1,4 @@
+import { Hotel } from "@/types/hotel"
 import { useForm } from "@inertiajs/react"
 import { FormEventHandler, useCallback } from "react"
 
@@ -10,6 +11,7 @@ export const useTravelCreateView = () => {
         last_date: '',
         count_down_start_time: '',
         images: [] as { url: string; id: string; }[],
+        hotel: {} as Hotel
     })
 
     const submit: FormEventHandler = (e) => {

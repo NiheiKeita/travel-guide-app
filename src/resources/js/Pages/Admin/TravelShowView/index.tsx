@@ -1,25 +1,8 @@
 import { useTravelShowView } from './hooks'
 import React, { useState } from 'react'
 import CountdownTimer from '@/Pages/Web/Top/components/CountdownTimer'
+import { Travel } from '@/types/travel'
 
-type Image = {
-  id: number,
-  url: string
-}
-
-type Travel = {
-  id: number;
-  created_at: string;
-  updated_at: string;
-  deleted_at?: string;
-  title: string;
-  memo?: string;
-  travel_price?: number;
-  first_date?: string;
-  last_date?: string;
-  count_down_start_time?: string;
-  images?: Image[]
-};
 type Props = {
   travel?: Travel
   days?: any
@@ -52,7 +35,6 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${travel?.images?.[0]?.url})`,
       }}
     >
-      {/* Header */}
       <header className="mb-8 rounded-lg bg-white bg-opacity-60 p-4 text-center">
         <h1 className="text-3xl font-bold text-[#344699] drop-shadow-md">
           {travel?.title}
@@ -68,8 +50,6 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
           <CountdownTimer targetDate={new Date(travel?.count_down_start_time)} />
         </div>
       }
-
-      {/* Schedule */}
       <div className="space-y-4">
         {days?.map((day: any, index: number) => (
           <div

@@ -7,6 +7,8 @@ import { PropertyKeys } from './types'
 import InputField from '@/Components/InputField'
 import InputLabel from '@/Components/InputLabel'
 import UploadImageArea from '@/Components/UploadImageArea'
+import HotelInput from '@/Components/HotelInput'
+import { Hotel } from '@/types/hotel'
 
 export const TravelCreateView = React.memo(function TravelCreateView() {
     const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
@@ -51,6 +53,13 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
                     <UploadImageArea
                         images={data["images"]}
                         onImageChange={handleChangeImages}
+                    />
+                </div>
+                <div className="mt-4" >
+                    <InputLabel value="ホテル情報" />
+                    <HotelInput
+                        formData={data["hotel"]}
+                        onChange={(value: Hotel) => setData("hotel", value)}
                     />
                 </div>
                 <div className="mt-4 flex items-center justify-end">

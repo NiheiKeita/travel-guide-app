@@ -11,6 +11,19 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Test: Story = {
+  args: {
+    travel: {
+      id: 1,
+      created_at: "2025-03-02 16:08:25",
+      updated_at: "2025-03-02 16:08:25",
+      title: "春の京都旅行",
+      memo: "桜のシーズンに京都を巡る旅行プラン",
+      travel_price: 50000,
+      first_date: "2025-03-03 00:00:00",
+      last_date: "2025-03-05 00:00:00",
+      count_down_start_time: "2025-03-03 00:00:00"
+    }
+  },
   play: async ({ canvasElement }) => {
     // const canvas = within(canvasElement)
     // await waitFor(async () => {

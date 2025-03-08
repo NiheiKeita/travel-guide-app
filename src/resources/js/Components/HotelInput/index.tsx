@@ -51,7 +51,7 @@ export const HotelInput = React.memo<Props>(function HotelInput({
                 <TextInput name="name" value={formData?.name} onChange={handleHotelNameChange} placeholder="ホテル名を入力" />
                 {searchResults.length > 0 && (
                     <div className="absolute mt-1 w-full border bg-white shadow-md">
-                        {searchResults.map((hotel: any, index: number) => (
+                        {searchResults.map((hotel, index) => (
                             <div key={index} className="cursor-pointer p-2 hover:bg-gray-200" onClick={() => handleSelectHotel(hotel)}>
                                 {hotel.name}
                             </div>
@@ -62,25 +62,25 @@ export const HotelInput = React.memo<Props>(function HotelInput({
 
             <div className="mt-2">
                 <InputLabel value="ホテルURL" />
-                <TextInput name="url" value={formData.url} onChange={handleInputChange} placeholder="https://example.com" />
+                <TextInput name="url" value={formData?.url} onChange={handleInputChange} placeholder="https://example.com" />
             </div>
 
             <div className="mt-2">
                 <InputLabel value="ホテルの画像" />
                 <UploadImageArea
-                    images={formData.images ?? []}
+                    images={formData?.images ?? []}
                     onImageChange={handleChangeImages}
                 />
             </div>
 
             <div className="mt-2">
                 <InputLabel value="ホテルの住所" />
-                <TextInput name="address" value={formData.address} onChange={handleInputChange} placeholder="住所を入力" />
+                <TextInput name="address" value={formData?.address} onChange={handleInputChange} placeholder="住所を入力" />
             </div>
 
             <div className="mt-2">
                 <InputLabel value="ホテルのアクセスURL" />
-                <TextInput name="accessUrl" value={formData.accessUrl} onChange={handleInputChange} placeholder="https://maps.google.com" />
+                <TextInput name="accessUrl" value={formData?.accessUrl} onChange={handleInputChange} placeholder="https://maps.google.com" />
             </div>
         </div>
     )

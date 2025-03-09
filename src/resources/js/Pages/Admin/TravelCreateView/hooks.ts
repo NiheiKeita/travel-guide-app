@@ -1,4 +1,5 @@
 import { Hotel } from "@/types/hotel"
+import { Schedule } from "@/types/schedule"
 import { useForm } from "@inertiajs/react"
 import { FormEventHandler, useCallback } from "react"
 

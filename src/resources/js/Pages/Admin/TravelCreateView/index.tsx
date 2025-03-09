@@ -10,6 +10,7 @@ import UploadImageArea from '@/Components/UploadImageArea'
 import HotelInput from '@/Components/HotelInput'
 import { Hotel } from '@/types/hotel'
 import SchedulesInput from '@/Components/SchedulesInput'
+import { Schedule } from '@/types/schedule'
 
 export const TravelCreateView = React.memo(function TravelCreateView() {
     const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
@@ -67,8 +68,7 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
                     <InputLabel value="スケジュール" />
                     <SchedulesInput
                         formData={data["schedules"]}
-                        onChange={(value: Schedule[]) => setData("schedules", value)}
-                    />
+                        onChange={(value: Schedule[]) => setData("schedules", value)} modalList={[]} />
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">

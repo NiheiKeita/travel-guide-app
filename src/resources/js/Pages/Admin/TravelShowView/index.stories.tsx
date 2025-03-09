@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 // import { waitFor, within } from '@storybook/testing-library';
 import { TravelShowView } from '.'
+import { url } from 'inspector'
 
 const meta: Meta<typeof TravelShowView> = {
   component: TravelShowView,
@@ -21,7 +22,16 @@ export const Test: Story = {
       travel_price: 50000,
       first_date: "2025-03-03 00:00:00",
       last_date: "2025-03-05 00:00:00",
-      count_down_start_time: "2025-03-03 00:00:00"
+      count_down_start_time: "2025-03-03 00:00:00",
+      hotels: [
+        {
+          name: "ホテル京都",
+          url: "https://www.hotel-kyoto.com",
+          images: [{ url: "https://img.dormy-hotels.com/resort/hotels/tokinoniwa/images/img_mv2.webp", id: "1" }],
+          address: "京都府",
+          accessUrl: "https://maps.google.com"
+        }
+      ]
     }
   },
   play: async ({ canvasElement }) => {

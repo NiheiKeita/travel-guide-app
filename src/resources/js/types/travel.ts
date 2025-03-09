@@ -1,3 +1,4 @@
+import { Hotel } from './hotel'
 import { Image } from './image'
 export type Travel = {
     id: number;
@@ -11,4 +12,5 @@ export type Travel = {
     last_date?: string;
     count_down_start_time?: string;
     images?: Image[]
+    hotels?: Hotel[]
 };

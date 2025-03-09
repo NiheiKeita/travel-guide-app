@@ -11,7 +11,8 @@ export const useTravelCreateView = () => {
         last_date: '',
         count_down_start_time: '',
         images: [] as { url: string; id: string; }[],
-        hotel: {} as Hotel
+        hotel: {} as Hotel,
+        schedules: [] as Schedule[]
     })
 
     const submit: FormEventHandler = (e) => {

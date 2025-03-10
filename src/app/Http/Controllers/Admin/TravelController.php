@@ -38,6 +38,7 @@ class TravelController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // dd($request);
         $travel = Travel::create([
             "title" => $request->title,
             "memo" => $request->memo,
@@ -49,6 +50,12 @@ class TravelController extends Controller
         foreach ($request->images as $requestImage) {
             $image = Image::where("id", $requestImage["id"])->first();
             $travel->images()->save($image);
+        }
+        foreach ($request->schedules as $requestSchedule) {
+            $travel->schedules()->create([
+                "title" => $requestSchedule["title"],
+                "time_text" => $requestSchedule["time"],
+            ]);
         }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }

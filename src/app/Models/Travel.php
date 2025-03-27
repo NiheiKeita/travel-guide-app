@@ -25,6 +25,7 @@ class Travel extends Model
     {
         return $this->belongsToMany(Hotel::class, 'travel_hotels', 'travel_id', 'hotel_id');
     }
+
     /**
      * @return HasMany<ScheduleGroup, $this>
      */

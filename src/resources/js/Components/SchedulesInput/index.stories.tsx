@@ -14,9 +14,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         formData: [
-            { time: "10:00", title: "朝の会" },
-            { time: "12:00", title: "昼の会" },
-            { time: "15:00", title: "夕方の会" },
+            { time_text: "10:00", title: "朝の会" },
+            { time_text: "12:00", title: "昼の会" },
+            { time_text: "15:00", title: "夕方の会" },
         ],
         modalList: [
             {

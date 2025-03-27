@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
 use App\Models\Image;
 use App\Models\Travel;
 use Illuminate\Http\RedirectResponse;
@@ -27,6 +28,11 @@ class TravelController extends Controller
         return Inertia::render('Admin/TravelShowView', [
             'travel' => Travel::where("id", $request->id)->with([
                 'images',
+                'hotels',
+                'hotels.images',
+                'modals',
+                'modals.cards',
+                'schedules',
             ])->first(),
         ]);
     }
@@ -51,6 +57,25 @@ class TravelController extends Controller
             $image = Image::where("id", $requestImage["id"])->first();
             $travel->images()->save($image);
         }
+        $requestHotel = $request->hotel;
+        // foreach ($request->hotel as $requestHotel) {
+        //     dd($requestHotel);
+        $hotel = Hotel::updateOrCreate([
+            "name" => $requestHotel["name"],
+        ], [
+            "name" => $requestHotel["name"],
+            "address" => $requestHotel["address"],
+            "accessUrl" => $requestHotel["accessUrl"],
+            "url" => $requestHotel["url"],
+        ]);
+        foreach ($requestHotel["images"] as $image) {
+            $image = Image::where("id", $image["id"])->first();
+            $hotel->images()->save($image);
+        }
+
+        $travel->hotels()->save($hotel);
+        // }
+
         $modalArray = [];
         foreach ($request->modals as $requestModal) {
             $modal = $travel->modals()->create([

@@ -13,6 +13,8 @@ import SchedulesInput from '@/Components/SchedulesInput'
 import { Schedule } from '@/types/schedule'
 import ModalCreator from '@/Components/ModalCreator'
 import { Modal } from '@/types/modal'
+import ScheduleGroupsInput from '@/Components/ScheduleGroupsInput'
+import { ScheduleGroup } from '@/types/scheduleGroup'
 
 export const TravelCreateView = React.memo(function TravelCreateView() {
     const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
@@ -75,10 +77,29 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
                 </div>
                 <div className="mt-4" >
                     <InputLabel value="スケジュール" />
-                    <SchedulesInput
-                        formData={data["schedules"]}
-                        onChange={(value: Schedule[]) => setData("schedules", value)} modalList={data["modals"]} />
+                    <ScheduleGroupsInput
+                        scheduleGroups={data["scheduleGroups"]}
+                        onChange={(value: ScheduleGroup[]) => setData("scheduleGroups", value)}
+                        modalList={data["modals"]}
+                    />
                 </div>
+                {/* <div className="mt-4" >
+                    <InputLabel value="スケジュール" />
+                    {data["scheduleGroups"]?.map((scheduleGroup) => (
+                        <div key={scheduleGroup.id} className="flex items-center gap-2">
+                            <SchedulesInput
+                                formData={scheduleGroup.schedules}
+                                onChange={(value: Schedule[]) => {
+                                    const newSchedules = value
+                                    setData("scheduleGroups", data["scheduleGroups"].map((item, i) =>
+                                        i === scheduleGroup.id ? { ...item, schedules: newSchedules } : item
+                                    ))
+                                }}
+                                modalList={data["modals"]}
+                            />
+                        </div>
+                    ))}
+                </div> */}
 
                 <div className="mt-4 flex items-center justify-end">
                     <Button className='w-full' variant='blue' disabled={processing}>

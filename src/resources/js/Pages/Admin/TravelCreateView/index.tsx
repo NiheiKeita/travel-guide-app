@@ -9,6 +9,10 @@ import InputLabel from '@/Components/InputLabel'
 import UploadImageArea from '@/Components/UploadImageArea'
 import HotelInput from '@/Components/HotelInput'
 import { Hotel } from '@/types/hotel'
+import SchedulesInput from '@/Components/SchedulesInput'
+import { Schedule } from '@/types/schedule'
+import ModalCreator from '@/Components/ModalCreator'
+import { Modal } from '@/types/modal'
 
 export const TravelCreateView = React.memo(function TravelCreateView() {
     const { data, setData, processing, errors, submit, handleChangeImages } = useTravelCreateView()
@@ -62,6 +66,20 @@ export const TravelCreateView = React.memo(function TravelCreateView() {
                         onChange={(value: Hotel) => setData("hotel", value)}
                     />
                 </div>
+                <div className="mt-4" >
+                    <InputLabel value="モーダル" />
+                    <ModalCreator
+                        formData={data["modals"]}
+                        onChange={(value: Modal[]) => setData("modals", value)}
+                    />
+                </div>
+                <div className="mt-4" >
+                    <InputLabel value="スケジュール" />
+                    <SchedulesInput
+                        formData={data["schedules"]}
+                        onChange={(value: Schedule[]) => setData("schedules", value)} modalList={data["modals"]} />
+                </div>
+
                 <div className="mt-4 flex items-center justify-end">
                     <Button className='w-full' variant='blue' disabled={processing}>
                         登録

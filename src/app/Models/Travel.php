@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,19 +27,19 @@ class Travel extends Model
     }
 
     /**
-     * @return BelongsTo<Schedule, $this>
+     * @return HasMany<Schedule, $this>
      */
-    public function schedules(): BelongsTo
+    public function schedules(): HasMany
     {
-        return $this->belongsTo(Schedule::class);
+        return $this->hasMany(Schedule::class);
     }
 
     /**
-     * @return BelongsTo<Modal, $this>
+     * @return HasMany<Modal, $this>
      */
-    public function modals(): BelongsTo
+    public function modals(): HasMany
     {
-        return $this->belongsTo(Modal::class);
+        return $this->hasMany(Modal::class);
     }
 
     /**

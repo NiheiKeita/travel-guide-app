@@ -51,10 +51,28 @@ class TravelController extends Controller
             $image = Image::where("id", $requestImage["id"])->first();
             $travel->images()->save($image);
         }
+        $modalArray = [];
+        foreach ($request->modals as $requestModal) {
+            $modal = $travel->modals()->create([
+                "type" => $requestModal["type"],
+                "title" => $requestModal["title"],
+            ]);
+            //modalArrayに $modalと$requestModal["id"]をセット
+            $modalArray[$requestModal["id"]] = $modal->id;
+
+            foreach ($requestModal["cards"] as $card) {
+                $modal->cards()->create([
+                    "url" => $card["url"],
+                    "title" => $card["title"],
+                    "accessURL" => $card["accessURL"],
+                ]);
+            }
+        }
         foreach ($request->schedules as $requestSchedule) {
             $travel->schedules()->create([
                 "title" => $requestSchedule["title"],
                 "time_text" => $requestSchedule["time"],
+                "modal_id" => isset($requestSchedule["modalId"]) ? $modalArray[$requestSchedule["modalId"]] ?? null : null,
             ]);
         }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');

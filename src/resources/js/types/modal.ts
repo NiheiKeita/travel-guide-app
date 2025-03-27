@@ -1,11 +1,11 @@
 export type Modal = {
-  id: number;
-  type: number;
-  title: string;
-  cards?: {
     id: number;
-    url: string;
+    type: number;
     title: string;
-    accessURL: string;
-  }[];
+    cards?: {
+        id: number;
+        url: string;
+        title: string;
+        accessURL: string;
+    }[];
 }

@@ -1,4 +1,5 @@
 import { Hotel } from "@/types/hotel"
+import { Modal } from "@/types/modal"
 import { Schedule } from "@/types/schedule"
 import { useForm } from "@inertiajs/react"
 import { FormEventHandler, useCallback } from "react"
@@ -13,7 +14,8 @@ export const useTravelCreateView = () => {
         count_down_start_time: '',
         images: [] as { url: string; id: string; }[],
         hotel: {} as Hotel,
-        schedules: [] as Schedule[]
+        schedules: [] as Schedule[],
+        modals: [] as Modal[]
     })
 
     const submit: FormEventHandler = (e) => {

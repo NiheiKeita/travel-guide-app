@@ -96,8 +96,8 @@ class TravelController extends Controller
         foreach ($request->schedules as $requestSchedule) {
             $travel->schedules()->create([
                 "title" => $requestSchedule["title"],
-                "time_text" => $requestSchedule["time"],
-                "modal_id" => isset($requestSchedule["modalId"]) ? $modalArray[$requestSchedule["modalId"]] ?? null : null,
+                "time_text" => $requestSchedule["time_text"],
+                "modal_id" => isset($requestSchedule["modal_id"]) ? $modalArray[$requestSchedule["modal_id"]] ?? null : null,
             ]);
         }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');

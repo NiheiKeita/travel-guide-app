@@ -32,6 +32,7 @@ class TravelController extends Controller
                 'hotels.images',
                 'modals',
                 'modals.cards',
+                'modals.cards.images',
                 'schedules',
             ])->first(),
         ]);
@@ -60,20 +61,22 @@ class TravelController extends Controller
         $requestHotel = $request->hotel;
         // foreach ($request->hotel as $requestHotel) {
         //     dd($requestHotel);
-        $hotel = Hotel::updateOrCreate([
-            "name" => $requestHotel["name"],
-        ], [
-            "name" => $requestHotel["name"],
-            "address" => $requestHotel["address"],
-            "accessUrl" => $requestHotel["accessUrl"],
-            "url" => $requestHotel["url"],
-        ]);
-        foreach ($requestHotel["images"] as $image) {
-            $image = Image::where("id", $image["id"])->first();
-            $hotel->images()->save($image);
+        if (isset($requestHotel["images"])) {
+            $hotel = Hotel::updateOrCreate([
+                "name" => $requestHotel["name"],
+            ], [
+                "name" => $requestHotel["name"],
+                "address" => $requestHotel["address"],
+                "accessUrl" => $requestHotel["accessUrl"],
+                "url" => $requestHotel["url"],
+            ]);
+            foreach ($requestHotel["images"] as $image) {
+                $image = Image::where("id", $image["id"])->first();
+                $hotel->images()->save($image);
+            }
+            $travel->hotels()->save($hotel);
         }
 
-        $travel->hotels()->save($hotel);
         // }
 
         $modalArray = [];
@@ -85,12 +88,16 @@ class TravelController extends Controller
             //modalArrayに $modalと$requestModal["id"]をセット
             $modalArray[$requestModal["id"]] = $modal->id;
 
-            foreach ($requestModal["cards"] as $card) {
-                $modal->cards()->create([
-                    "url" => $card["url"],
-                    "title" => $card["title"],
-                    "accessURL" => $card["accessURL"],
+            foreach ($requestModal["cards"] as $requestCard) {
+                $card = $modal->cards()->create([
+                    "url" => $requestCard["url"],
+                    "title" => $requestCard["title"],
+                    "accessURL" => $requestCard["accessURL"],
                 ]);
+                foreach ($requestCard["images"] as $requestImage) {
+                    $image = Image::where("id", $requestImage["id"])->first();
+                    $card->images()->save($image);
+                }
             }
         }
         foreach ($request->schedules as $requestSchedule) {

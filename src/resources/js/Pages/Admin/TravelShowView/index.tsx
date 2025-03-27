@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import CountdownTimer from '@/Pages/Web/Top/components/CountdownTimer'
 import { Travel } from '@/types/travel'
 import HotelShow from './components/HotelShow'
+import ModalView from '@/Components/ModalView'
 
 type Props = {
     travel?: Travel
@@ -14,17 +15,19 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
     console.log(travel)
     const { data, setData, post, processing, errors, reset, submit } = useTravelShowView()
 
+    const [openModals, setOpenModals] = useState(travel?.modals?.map(v => ({ id: v.id, isOpen: false })) ?? [])
+
     const [activeDay, setActiveDay] = useState<number | null>(null)
     function toggleDay(index: number): void {
         setActiveDay(activeDay === index ? null : index)
     }
     const modalControl = (id: number, opened: boolean) => {
         console.log(id, opened)
-        // setModals(prev => {
-        //     const data = [...prev]
-        //     data.find(modal => modal.id === id)!.isOpen = opened
-        //     return data
-        // })
+        setOpenModals(prev => {
+            const data = [...prev]
+            data.find(modal => modal.id === id)!.isOpen = opened
+            return data
+        })
     }
 
     return (
@@ -96,6 +99,62 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
                     <HotelShow key={index} hotel={hotel} />
                 ))}
             </div>
+            {travel?.modals?.map((modal) => (
+                <ModalView
+                    key={modal.id}
+                    isOpen={openModals.find(openModal => modal.id === openModal.id)?.isOpen ?? false}
+                    onClose={() => { modalControl(1, false) }}
+                    title={modal.title}
+                >
+                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~食べ歩きグルメ~</div>
+                    <div className="grid grid-cols-2 gap-4">
+                        {modal?.cards?.map((card, index) => (
+                            <div key={index} className="cursor-pointer">
+                                {/* 画像クリックでURLを新しいタブで開く */}
+                                <a
+                                    href={card.url || undefined} // URLがない場合はundefined
+                                    target={card.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                    rel={card.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                >
+                                    <img
+                                        src={card.images?.[0]?.url}
+                                        alt={card.title}
+                                        className="h-auto w-full rounded-lg object-cover shadow-lg transition-shadow hover:shadow-xl"
+                                    />
+                                </a>
+                                {/* タイトルクリックでURLを新しいタブで開く */}
+                                <a
+                                    href={card.url || undefined} // URLがない場合はundefined
+                                    target={card.url ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                    rel={card.url ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                    className={`mt-2 block text-center text-sm font-bold ${card.url ? "text-gray-800 underline hover:text-blue-500" : "text-gray-800"}`}
+                                    onClick={(e) => {
+                                        if (!card.url) {
+                                            e.preventDefault() // URLがない場合のクリックを無効化
+                                        }
+                                    }}
+                                >
+                                    {card.title}
+                                </a>
+                                <div className="flex items-center justify-center pt-1 text-xs font-bold text-blue-500">
+                                    <a
+                                        href={card.accessURL || undefined} // URLがない場合はundefined
+                                        target={card.accessURL ? "_blank" : undefined} // URLがない場合はtargetを無効化
+                                        rel={card.accessURL ? "noopener noreferrer" : undefined} // URLがない場合はrelを無効化
+                                        onClick={(e) => {
+                                            if (!card.accessURL) {
+                                                e.preventDefault() // URLがない場合のクリックを無効化
+                                            }
+                                        }}
+                                    >
+                                        地図アプリ
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </ModalView>
+            ))}
         </div>
     )
 })

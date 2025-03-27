@@ -62,7 +62,7 @@ export const SchedulesInput = React.memo<Props>(function SchedulesInput({
                         <option value="">未選択</option>
                         {modalList?.map((modal) => (
                             <option key={modal.id} value={modal.id}>
-                                {modal.cards?.[0]?.title || `モーダル ${modal.id}`}
+                                {`モーダル ${modal.id}`}
                             </option>
                         ))}
                     </select>

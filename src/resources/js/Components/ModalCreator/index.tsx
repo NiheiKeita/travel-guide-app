@@ -19,6 +19,7 @@ export const ModalCreator = React.memo<Props>(function ModalCreator({
     const [modalList, setModalList] = useState<Modal[]>(formData)
 
     const updateModal = (id: number, updatedModal: Modal) => {
+        console.log(updatedModal)
         const updatedList = modalList.map((m) => (m.id === id ? updatedModal : m))
         setModalList(updatedList)
         onChange(updatedList)

@@ -26,11 +26,11 @@ class Travel extends Model
         return $this->belongsToMany(Hotel::class, 'travel_hotels', 'travel_id', 'hotel_id');
     }
     /**
-     * @return HasMany<Schedule, $this>
+     * @return HasMany<ScheduleGroup, $this>
      */
-    public function schedules(): HasMany
+    public function scheduleGroups(): HasMany
     {
-        return $this->hasMany(Schedule::class);
+        return $this->hasMany(ScheduleGroup::class);
     }
 
     /**

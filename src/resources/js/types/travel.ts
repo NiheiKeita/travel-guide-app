@@ -1,7 +1,7 @@
 import { Hotel } from './hotel'
 import { Image } from './image'
 import { Modal } from './modal'
-import { Schedule } from './schedule'
+import { ScheduleGroup } from './scheduleGroup'
 export type Travel = {
     id: number;
     created_at: string;
@@ -15,6 +15,7 @@ export type Travel = {
     count_down_start_time?: string;
     images?: Image[]
     hotels?: Hotel[]
-    schedules?: Schedule[]
+    // schedules?: Schedule[]
+    schedule_groups?: ScheduleGroup[]
     modals?: Modal[]
 };

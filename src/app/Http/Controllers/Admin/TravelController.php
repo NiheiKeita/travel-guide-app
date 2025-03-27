@@ -33,7 +33,8 @@ class TravelController extends Controller
                 'modals',
                 'modals.cards',
                 'modals.cards.images',
-                'schedules',
+                'scheduleGroups',
+                'scheduleGroups.schedules',
             ])->first(),
         ]);
     }
@@ -100,12 +101,17 @@ class TravelController extends Controller
                 }
             }
         }
-        foreach ($request->schedules as $requestSchedule) {
-            $travel->schedules()->create([
-                "title" => $requestSchedule["title"],
-                "time_text" => $requestSchedule["time_text"],
-                "modal_id" => isset($requestSchedule["modal_id"]) ? $modalArray[$requestSchedule["modal_id"]] ?? null : null,
+        foreach ($request->scheduleGroups as $requestScheduleGroup) {
+            $scheduleGroup = $travel->scheduleGroups()->create([
+                "title" => $requestScheduleGroup["title"],
             ]);
+            foreach ($requestScheduleGroup["schedules"] as $requestSchedule) {
+                $scheduleGroup->schedules()->create([
+                    "title" => $requestSchedule["title"],
+                    "time_text" => $requestSchedule["time_text"],
+                    "modal_id" => isset($requestSchedule["modal_id"]) ? $modalArray[$requestSchedule["modal_id"]] ?? null : null,
+                ]);
+            }
         }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }

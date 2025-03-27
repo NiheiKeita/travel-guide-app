@@ -53,48 +53,47 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
                 </div>
             }
             <div className="space-y-4">
-                {/*
-                ] {days?.map((day: any, index: number) => (
-                         */}
-                <div
-                    className="overflow-hidden rounded-lg bg-white bg-opacity-60 shadow-lg"
-                >
-                    <button
-                        className="w-full bg-[#344699] px-4 py-3 text-left font-semibold text-white"
-                        onClick={() => toggleDay(1)}
-                    >
-                        1日目
-                    </button>
+                {travel?.schedule_groups?.map((scheduleGroup) => (
                     <div
-                        className={`overflow-hidden transition-all duration-500 ${activeDay === 1 ? "max-h-[1000px]" : "max-h-0"}`}
+                        key={scheduleGroup.id}
+                        className="overflow-hidden rounded-lg bg-white bg-opacity-60 shadow-lg"
                     >
-                        <ul className="space-y-2 p-4">
-                            {travel?.schedules?.map((schedules, i: number) => (
-                                <li
-                                    key={i}
-                                    onClick={() => schedules.modal_id !== null && schedules.modal_id !== undefined && modalControl(schedules.modal_id, true)}
-                                    className="flex items-center justify-between rounded-lg border border-[#344699] bg-[#FBFCFF] p-2 shadow-sm"
-                                >
-                                    <span className="text-sm text-[#2B262E]">{schedules.time_text}</span>
+                        <button
+                            className="w-full bg-[#344699] px-4 py-3 text-left font-semibold text-white"
+                            onClick={() => toggleDay(scheduleGroup.id)}
+                        >
+                            {scheduleGroup.title}
+                        </button>
+                        <div
+                            className={`overflow-hidden transition-all duration-500 ${activeDay === scheduleGroup.id ? "max-h-[1000px]" : "max-h-0"}`}
+                        >
+                            <ul className="space-y-2 p-4">
+                                {scheduleGroup?.schedules?.map((schedules, i: number) => (
+                                    <li
+                                        key={i}
+                                        onClick={() => schedules.modal_id !== null && schedules.modal_id !== undefined && modalControl(schedules.modal_id, true)}
+                                        className="flex items-center justify-between rounded-lg border border-[#344699] bg-[#FBFCFF] p-2 shadow-sm"
+                                    >
+                                        <span className="text-sm text-[#2B262E]">{schedules.time_text}</span>
 
-                                    <div className="flex items-center">
-                                        <span className="font-medium text-[#2B262E]">
-                                            {schedules.title}
-                                        </span>
-                                        {schedules.modal_id !== null && (
-                                            <img
-                                                src="/img/top/finger.gif"
-                                                alt=""
-                                                className="h-8 w-8 rounded-lg object-cover"
-                                            />
-                                        )}
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                                        <div className="flex items-center">
+                                            <span className="font-medium text-[#2B262E]">
+                                                {schedules.title}
+                                            </span>
+                                            {schedules.modal_id !== null && (
+                                                <img
+                                                    src="/img/top/finger.gif"
+                                                    alt=""
+                                                    className="h-8 w-8 rounded-lg object-cover"
+                                                />
+                                            )}
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                {/* ))} */}
+                ))}
                 {travel?.hotels?.map((hotel, index) => (
                     <HotelShow key={index} hotel={hotel} />
                 ))}

@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('schedule_groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger("schedule_group_id");
-            $table->unsignedBigInteger("modal_id")->nullable();
+            $table->unsignedBigInteger("travel_id");
             $table->string('title')->nullable();
-            $table->string('time_text')->nullable();
-            $table->timestamp('first_at')->nullable();
-            $table->timestamp('last_at')->nullable();
+            $table->integer('sort')->nullable();
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('schedule_groups');
     }
 };

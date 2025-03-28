@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { SchedulesInput } from '.'
 import React from 'react'
+import ScheduleGroupsInput from '.'
 import { Schedule } from '@/types/schedule'
 
-const meta: Meta<typeof SchedulesInput> = {
-    component: SchedulesInput,
+const meta: Meta<typeof ScheduleGroupsInput> = {
+    component: ScheduleGroupsInput,
     tags: ['autodocs'],
 }
 export default meta
@@ -13,10 +13,13 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        formData: [
-            { time_text: "10:00", title: "朝の会" },
-            { time_text: "12:00", title: "昼の会" },
-            { time_text: "15:00", title: "夕方の会" },
+        scheduleGroups: [
+            {
+                id: 1, title: "朝の会",
+                schedules: [
+                    { time_text: "08:00", title: "朝の会", modal_id: 1 },
+                ]
+            },
         ],
         modalList: [
             {
@@ -29,13 +32,17 @@ export const Default: Story = {
         // onChange: (value) => console.log(value),
     },
     render(args) {
-        const [form, setForm] = React.useState(args.formData)
-        const handleChange = (data: Schedule[]) => {
+        const [form, setForm] = React.useState(args.scheduleGroups)
+        const handleChange = (data: {
+            id: number
+            title: string
+            schedules: Schedule[]
+        }[]) => {
             setForm(data)
         }
         return (
-            <SchedulesInput
-                formData={form}
+            <ScheduleGroupsInput
+                scheduleGroups={form}
                 onChange={handleChange}
                 modalList={args.modalList}
             />

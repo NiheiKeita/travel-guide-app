@@ -20,7 +20,7 @@ class Hotel extends Model
      */
     public function travels(): BelongsToMany
     {
-        return $this->belongsToMany(Travel::class);
+        return $this->belongsToMany(Travel::class, 'travel_hotels', 'hotel_id', 'travel_id');
     }
 
     /**

@@ -1,5 +1,5 @@
 export type Schedule = {
-    time: string;
+    time_text: string;
     title: string;
-    modalId?: number;
+    modal_id?: number;
 }

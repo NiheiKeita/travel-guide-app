@@ -1,3 +1,4 @@
+import { Image } from './image'
 export type Modal = {
     id: number;
     type: number;
@@ -7,5 +8,6 @@ export type Modal = {
         url: string;
         title: string;
         accessURL: string;
+        images?: Image[];
     }[];
 }

@@ -15,11 +15,11 @@ class Schedule extends Model
     ];
 
     /**
-     * @return BelongsTo<Travel, $this>
+     * @return BelongsTo<ScheduleGroup, $this>
      */
-    public function travel(): BelongsTo
+    public function scheduleGroups(): BelongsTo
     {
-        return $this->belongsTo(Travel::class);
+        return $this->belongsTo(ScheduleGroup::class);
     }
 
     /**

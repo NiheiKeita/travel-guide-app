@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
 use App\Models\Image;
 use App\Models\Travel;
 use Illuminate\Http\RedirectResponse;
@@ -27,6 +28,13 @@ class TravelController extends Controller
         return Inertia::render('Admin/TravelShowView', [
             'travel' => Travel::where("id", $request->id)->with([
                 'images',
+                'hotels',
+                'hotels.images',
+                'modals',
+                'modals.cards',
+                'modals.cards.images',
+                'scheduleGroups',
+                'scheduleGroups.schedules',
             ])->first(),
         ]);
     }
@@ -51,6 +59,27 @@ class TravelController extends Controller
             $image = Image::where("id", $requestImage["id"])->first();
             $travel->images()->save($image);
         }
+        $requestHotel = $request->hotel;
+        // foreach ($request->hotel as $requestHotel) {
+        //     dd($requestHotel);
+        if (isset($requestHotel["images"])) {
+            $hotel = Hotel::updateOrCreate([
+                "name" => $requestHotel["name"],
+            ], [
+                "name" => $requestHotel["name"],
+                "address" => $requestHotel["address"],
+                "accessUrl" => $requestHotel["accessUrl"],
+                "url" => $requestHotel["url"],
+            ]);
+            foreach ($requestHotel["images"] as $image) {
+                $image = Image::where("id", $image["id"])->first();
+                $hotel->images()->save($image);
+            }
+            $travel->hotels()->save($hotel);
+        }
+
+        // }
+
         $modalArray = [];
         foreach ($request->modals as $requestModal) {
             $modal = $travel->modals()->create([
@@ -60,20 +89,29 @@ class TravelController extends Controller
             //modalArrayに $modalと$requestModal["id"]をセット
             $modalArray[$requestModal["id"]] = $modal->id;
 
-            foreach ($requestModal["cards"] as $card) {
-                $modal->cards()->create([
-                    "url" => $card["url"],
-                    "title" => $card["title"],
-                    "accessURL" => $card["accessURL"],
+            foreach ($requestModal["cards"] as $requestCard) {
+                $card = $modal->cards()->create([
+                    "url" => $requestCard["url"],
+                    "title" => $requestCard["title"],
+                    "accessURL" => $requestCard["accessURL"],
                 ]);
+                foreach ($requestCard["images"] as $requestImage) {
+                    $image = Image::where("id", $requestImage["id"])->first();
+                    $card->images()->save($image);
+                }
             }
         }
-        foreach ($request->schedules as $requestSchedule) {
-            $travel->schedules()->create([
-                "title" => $requestSchedule["title"],
-                "time_text" => $requestSchedule["time"],
-                "modal_id" => isset($requestSchedule["modalId"]) ? $modalArray[$requestSchedule["modalId"]] ?? null : null,
+        foreach ($request->scheduleGroups as $requestScheduleGroup) {
+            $scheduleGroup = $travel->scheduleGroups()->create([
+                "title" => $requestScheduleGroup["title"],
             ]);
+            foreach ($requestScheduleGroup["schedules"] as $requestSchedule) {
+                $scheduleGroup->schedules()->create([
+                    "title" => $requestSchedule["title"],
+                    "time_text" => $requestSchedule["time_text"],
+                    "modal_id" => isset($requestSchedule["modal_id"]) ? $modalArray[$requestSchedule["modal_id"]] ?? null : null,
+                ]);
+            }
         }
         return redirect(route("admin.travel.index"))->with('message', '登録が完了しました');
     }

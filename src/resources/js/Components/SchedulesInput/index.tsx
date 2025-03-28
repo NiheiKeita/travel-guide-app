@@ -23,7 +23,7 @@ export const SchedulesInput = React.memo<Props>(function SchedulesInput({
     }
 
     const addSchedule = () => {
-        const newSchedule: Schedule = { time: "", title: "" }
+        const newSchedule: Schedule = { time_text: "", title: "" }
         onChange([...formData, newSchedule])
     }
 
@@ -41,8 +41,8 @@ export const SchedulesInput = React.memo<Props>(function SchedulesInput({
                         name={`schedule-time-${index}`}
                         className="w-1/4"
                         placeholder="時間"
-                        value={schedule.time}
-                        onChange={(e) => handleChange(index, "time", e.target.value)}
+                        value={schedule.time_text}
+                        onChange={(e) => handleChange(index, "time_text", e.target.value)}
                     />
                     <TextInput
                         name={`schedule-title-${index}`}
@@ -54,15 +54,15 @@ export const SchedulesInput = React.memo<Props>(function SchedulesInput({
                     <select
                         name={`schedule-modal-${index}`}
                         className="w-1/4"
-                        value={schedule.modalId ?? ""}
+                        value={schedule.modal_id ?? ""}
                         onChange={(e) =>
-                            handleChange(index, "modalId", e.target.value ? Number(e.target.value) : undefined)
+                            handleChange(index, "modal_id", e.target.value ? Number(e.target.value) : undefined)
                         }
                     >
                         <option value="">未選択</option>
                         {modalList?.map((modal) => (
                             <option key={modal.id} value={modal.id}>
-                                {modal.cards?.[0]?.title || `モーダル ${modal.id}`}
+                                {`モーダル ${modal.id}`}
                             </option>
                         ))}
                     </select>

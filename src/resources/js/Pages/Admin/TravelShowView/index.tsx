@@ -102,10 +102,10 @@ export const TravelShowView = React.memo<Props>(function TravelShowView({
                 <ModalView
                     key={modal.id}
                     isOpen={openModals.find(openModal => modal.id === openModal.id)?.isOpen ?? false}
-                    onClose={() => { modalControl(1, false) }}
-                    title={modal.title}
+                    onClose={() => { modalControl(modal.id, false) }}
+                    title={""}
                 >
-                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">~食べ歩きグルメ~</div>
+                    <div className="mb-4 flex items-center justify-center text-xl font-bold text-gray-800">{modal.title}</div>
                     <div className="grid grid-cols-2 gap-4">
                         {modal?.cards?.map((card, index) => (
                             <div key={index} className="cursor-pointer">

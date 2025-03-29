@@ -16,6 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger("modal_id");
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
+            $table->string('accessURL')->nullable();
         });
     }
 

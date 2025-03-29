@@ -12,9 +12,6 @@ type Props = {
 export const TravelShowView = React.memo<Props>(function TravelShowView({
     travel,
 }) {
-    console.log(travel)
-    const { data, setData, post, processing, errors, reset, submit } = useTravelShowView()
-
     const [openModals, setOpenModals] = useState(travel?.modals?.map(v => ({ id: v.id, isOpen: false })) ?? [])
 
     const [activeDay, setActiveDay] = useState<number | null>(null)

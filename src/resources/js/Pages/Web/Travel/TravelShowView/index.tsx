@@ -2,8 +2,8 @@ import { useTravelShowView } from './hooks'
 import React, { useState } from 'react'
 import CountdownTimer from '@/Pages/Web/Top/components/CountdownTimer'
 import { Travel } from '@/types/travel'
-import HotelShow from './components/HotelShow'
 import ModalView from '@/Components/ModalView'
+import HotelShow from '@/Components/HotelShow'
 
 type Props = {
     travel?: Travel

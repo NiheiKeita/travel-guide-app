@@ -22,9 +22,6 @@ class TravelController extends Controller
 
     public function show(Request $request): Response
     {
-        // dd(Travel::where("id", $request->id)->with([
-        //     'images',
-        // ])->first());
         return Inertia::render('Admin/TravelShowView', [
             'travel' => Travel::where("id", $request->id)->with([
                 'images',
@@ -46,7 +43,6 @@ class TravelController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // dd($request);
         $travel = Travel::create([
             "title" => $request->title,
             "memo" => $request->memo,

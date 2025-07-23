@@ -23,6 +23,7 @@ Route::group(['middleware' => 'basicauth'], function () {
         return redirect(route('web.top'));
     });
     Route::get('/', [TopController::class, 'index'])->name('web.top');
+    Route::get('/suwako', [TopController::class, 'suwako'])->name('web.suwako');
     Route::get('/travels/{id}', [TravelWebController::class, 'show'])->name('travel.show');
 
     //管理画面側
